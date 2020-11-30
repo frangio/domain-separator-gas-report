@@ -6,6 +6,7 @@ contract("Test", accounts => {
     "Keccak",
     "Immutable",
     "KeccakPlusImmutable",
+    "KeccakPlusCache",
   ];
 
   for (const name of names) {

@@ -92,3 +92,27 @@ contract KeccakPlusImmutable {
     }
 }
 
+
+contract KeccakPlusCache {
+    bytes32 immutable name;
+    bytes32 immutable version;
+    bytes32 immutable typeHash;
+
+    constructor() public {
+        name = keccak256("Name");
+        version = keccak256("1");
+        typeHash = keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)");
+    }
+
+    function getDomainSeparator() public returns (bytes32) {
+        return keccak256(
+            abi.encode(
+                typeHash,
+                name,
+                version,
+                ChainId.chainId(),
+                address(this)
+            )
+        );
+    }
+}
